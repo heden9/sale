@@ -11,11 +11,11 @@ export default class RouterMap extends React.Component{
         return (
             <Router history={ this.props.history }>
                 <Route path='/' component={App}>
-                    <IndexRoute component={Home} onEnter={()=>{
-                        nav.nowView = 'home';
-                    }}/>
-                    <Route path='detail' component={Detail} onEnter={()=>{
+                    <IndexRoute component={Detail} onEnter={()=>{
                         nav.nowView = 'detail';
+                    }}/>
+                    <Route path='detail' component={Home} onEnter={()=>{
+                        nav.nowView = 'home';
                     }}/>
                     <Route path='publish' component={Publish} onEnter={()=>{
                         nav.nowView = 'publish';

@@ -9,10 +9,8 @@ module.exports = {
     // 将 第三方依赖 单独打包
     vendor: [
       'react', 
-      'react-dom', 
-      'react-redux', 
-      'react-router', 
-      'redux', 
+      'react-dom',
+      'react-router',
       'es6-promise', 
       'whatwg-fetch', 
       'immutable'
@@ -43,7 +41,7 @@ module.exports = {
 
   plugins: [
     // webpack 内置的 banner-plugin
-    new webpack.BannerPlugin("Copyright by wangfupeng1988@github.com."),
+    new webpack.BannerPlugin("Copyright by w771854332@github.com."),
 
     // html 模板插件
     new HtmlWebpackPlugin({

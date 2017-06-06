@@ -9,7 +9,7 @@ export default class ParentContainer extends React.Component{
     }
     render(){
         return(
-            <div className='parent-container' style={this.props.top ? {paddingTop: this.props.top} : {paddingTop: 0}}>{this.props.children}</div>
+            <div className='parent-container' style={{paddingTop: this.props.top || 0}}>{this.props.children}</div>
         );
     }
 }

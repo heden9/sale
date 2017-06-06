@@ -25,8 +25,7 @@ class Item extends React.Component{
     render(){
         const data = this.props.data;
         let info = {
-            background: `url(${data.pics[0]}) center center`,
-            backgroundSize: 'cover'
+            background: `url(${data.pics[0]}) center center no-repeat /cover`,
         };
         return(
             <div className='Item'>

@@ -49,6 +49,8 @@ export default class Detail extends React.Component{
         });
     }
     searchHandle(data){
+        if(data == '')
+            return;
         console.log('search');
     };
     render(){

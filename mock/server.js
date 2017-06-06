@@ -2,7 +2,7 @@ var app = require('koa')();
 var router = require('koa-router')();
 
 var detailListData = require('./Detail/list.js');
-router.get('/api/detail/:id:search', function *(next) {
+router.get('/api/sell/goods/list_goods/', function *(next) {
     console.log('商品列表页');
 
     // 参数
