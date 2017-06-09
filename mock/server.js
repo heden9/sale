@@ -14,6 +14,14 @@ router.get('/api/sell/goods/list_goods/', function *(next) {
     this.body = detailListData;
 });
 
+router.post('/api/sell/goods/picture_upd/', function *(next) {
+    console.log('接受文件');
+
+    // 参数
+
+    this.body = 1;
+});
+
 app.use(router.routes())
     .use(router.allowedMethods());
 app.listen(3000);

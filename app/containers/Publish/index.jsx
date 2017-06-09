@@ -2,6 +2,7 @@ import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import ParentContainer from '../../components/ParentContainer';
 import ImgUpLoad from '../../components/ImgUpLoad';
+import { submit } from '../../fetch/Detail';
 import './style.less';
 export default class Publish extends React.Component{
     constructor(props, context){
@@ -10,20 +11,42 @@ export default class Publish extends React.Component{
         this.state = {
             goodsName: '',
             goodsDes: '',
-            files: [],
+            filesID: [],
             canPublish: false
         };
     }
     publish(){
         if(!this.state.canPublish)
             return;
-        console.log(this.state.goodsName);
-        console.log(this.state.files);
+        console.log(this.state.filesID);
     }
-    getFiles(files){
+    getFilesID(id){
         this.setState({
-            files: files
-        })
+            filesID: this.state.filesID.concat(id)
+        });
+    }
+    deleteFilesID(index){
+        let arr = this.state.filesID.filter((item, i) => {
+            if(i != index){
+                return item;
+            }
+        });
+        this.setState({
+           filesID: arr
+        });
+    }
+    uploadImg(img,nowIndex,callback){
+        const formData = new FormData();
+        formData.append('file[]', img);
+        const result = submit(formData);
+        result.then((res)=>{
+            return res.json();
+        }).then((json)=>{
+            const data = json || -1;
+            callback && callback(data,nowIndex);
+        }).catch(function(error) {
+            console.log('request failed: ', error)
+        });
     }
     render(){
         return(
@@ -41,7 +64,7 @@ export default class Publish extends React.Component{
                                         canPublish: flag
                                     });
                                 }}/>
-                    <ImgUpLoad getFiles={this.getFiles.bind(this)} />
+                    <ImgUpLoad  upload={this.uploadImg} getID={this.getFilesID.bind(this)} delID={this.deleteFilesID.bind(this)} ID={this.state.filesID}/>
                 </div>
                 <div className='goodsName'>
                     <input type="text"

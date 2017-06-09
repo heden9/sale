@@ -15,7 +15,7 @@ export default class Detail extends React.Component{
             List: [],
             isLoading: false,
             hasMore: false,
-            lastID: 0
+            lastID: 0,
         };
     }
     componentDidMount(){
@@ -43,7 +43,7 @@ export default class Detail extends React.Component{
                 const data = json;
                 this.setState({
                     List: this.state.List.concat(data),
-                    lastID: this.state.lastID + 1,
+                    lastID: data[data.length-1].id,
                     hasMore: true
                 });
         });
@@ -51,12 +51,31 @@ export default class Detail extends React.Component{
     searchHandle(data){
         if(data == '')
             return;
-        console.log('search');
+        this.setState({
+            isLoading: true
+        });
+        const result = getListData(-1,data);
+        this.searchResultHandle(result);
+        this.setState({
+            isLoading: false
+        });
+    };
+    searchResultHandle(result){
+        result.then((res)=>res.json())
+            .then((json)=>{
+                const data = json;
+                const id = data.length ? -1 : data[data.length-1].id;
+                this.setState({
+                    List: data,
+                    lastID: id,
+                    hasMore: true
+                });
+            });
     };
     render(){
         return(
             <ParentContainer top={40}>
-                <Search search={this.searchHandle}/>
+                <Search search={this.searchHandle.bind(this)}/>
                 {
                     this.state.hasMore ?
                         <DetailList List={this.state.List}/>
