@@ -19,7 +19,7 @@ router.post('/api/sell/goods/picture_upd/', function *(next) {
 
     // 参数
 
-    this.body = 1;
+    this.body = false;
 });
 
 app.use(router.routes())

@@ -2,7 +2,8 @@ import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import ParentContainer from '../../components/ParentContainer';
 import ImgUpLoad from '../../components/ImgUpLoad';
-import { submit } from '../../fetch/Detail';
+import { upload,submit } from '../../fetch/Detail';
+import { hashHistory } from 'react-router';
 import './style.less';
 export default class Publish extends React.Component{
     constructor(props, context){
@@ -18,9 +19,27 @@ export default class Publish extends React.Component{
     publish(){
         if(!this.state.canPublish)
             return;
-        console.log(this.state.filesID);
+        const info = {
+            name: this.state.goodsName,
+            description: this.state.goodsDes,
+            pics: this.state.filesID
+        };
+        const result = submit(info);
+        result
+            .then((res)=>res.json())
+            .then((json)=>{
+                console.log(json);
+                alert('发布成功');
+                hashHistory.push('/');
+                })
+            .catch((err)=>{
+                alert('发布失败');
+                   console.log(err);
+                });
     }
     getFilesID(id){
+        if(!id)
+            return;
         this.setState({
             filesID: this.state.filesID.concat(id)
         });
@@ -36,16 +55,19 @@ export default class Publish extends React.Component{
         });
     }
     uploadImg(img,nowIndex,callback){
+        if(!img)
+            return;
         const formData = new FormData();
         formData.append('file[]', img);
-        const result = submit(formData);
+        console.log(img);
+        const result = upload(formData);
         result.then((res)=>{
             return res.json();
         }).then((json)=>{
-            const data = json || -1;
+            const data = json || false;
             callback && callback(data,nowIndex);
         }).catch(function(error) {
-            console.log('request failed: ', error)
+            console.log('request failed: ', error);
         });
     }
     render(){
@@ -64,7 +86,7 @@ export default class Publish extends React.Component{
                                         canPublish: flag
                                     });
                                 }}/>
-                    <ImgUpLoad  upload={this.uploadImg} getID={this.getFilesID.bind(this)} delID={this.deleteFilesID.bind(this)} ID={this.state.filesID}/>
+                    <ImgUpLoad  upload={this.uploadImg} getID={this.getFilesID.bind(this)} delID={this.deleteFilesID.bind(this)}/>
                 </div>
                 <div className='goodsName'>
                     <input type="text"

@@ -13,6 +13,7 @@ export default class Detail extends React.Component{
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
             List: [],
+            waitInfo: true,
             isLoading: false,
             hasMore: false,
             lastID: 0,
@@ -20,7 +21,6 @@ export default class Detail extends React.Component{
     }
     componentDidMount(){
         this.getFirstData();
-
     }
     getFirstData(){
         const result = getListData();
@@ -43,8 +43,9 @@ export default class Detail extends React.Component{
                 const data = json;
                 this.setState({
                     List: this.state.List.concat(data),
-                    lastID: data[data.length-1].id,
-                    hasMore: true
+                    lastID: data.length ?  data[data.length-1].id : -1,
+                    hasMore: data.length >= 10 ? true : false,
+                    waitInfo: false
                 });
         });
     }
@@ -64,11 +65,10 @@ export default class Detail extends React.Component{
         result.then((res)=>res.json())
             .then((json)=>{
                 const data = json;
-                const id = data.length ? -1 : data[data.length-1].id;
                 this.setState({
                     List: data,
-                    lastID: id,
-                    hasMore: true
+                    lastID: data.length ?  data[data.length-1].id : -1,
+                    hasMore: data.length >= 10 ? true : false,
                 });
             });
     };
@@ -77,11 +77,14 @@ export default class Detail extends React.Component{
             <ParentContainer top={40}>
                 <Search search={this.searchHandle.bind(this)}/>
                 {
-                    this.state.hasMore ?
-                        <DetailList List={this.state.List}/>
-                        : <h1>加载中。。。</h1>
+                    this.state.waitInfo ? <h5>加载中。。。</h5>
+                        : <DetailList List={this.state.List}/>
                 }
-                <LoadMore data={[this.state.isLoading,this.loadMoreData.bind(this)]}/>
+                {
+                    this.state.hasMore ?
+                        <LoadMore data={[this.state.isLoading,this.loadMoreData.bind(this)]}/>
+                        : <h5>到底啦。。</h5>
+                }
             </ParentContainer>
         );
     }

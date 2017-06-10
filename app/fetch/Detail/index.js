@@ -1,5 +1,5 @@
 import { get } from './../get.js';
-import { submitData } from './../post.js';
+import { submitData, post } from './../post.js';
 
 export function getListData(id,search){
     const s1 = search ? search : '',
@@ -12,11 +12,21 @@ export function getListData(id,search){
     return result;
 }
 
-export function submit(data){
+export function upload(data){
     let result;
     if(__DEV__)
         result = submitData(`/api/sell/goods/picture_upd`);
     else
         result = submitData('/index.php/goods/picture_upd',data);
+    return result;
+}
+
+
+export function submit(data){
+    let result;
+    if(__DEV__)
+        result = post(`/api/sell/goods/picture_upd`);
+    else
+        result = post('/index.php/goods/sell_ope',data);
     return result;
 }
