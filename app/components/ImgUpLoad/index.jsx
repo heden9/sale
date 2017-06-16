@@ -107,7 +107,7 @@ export default class ImgUpLoad extends React.Component{
                 {this._renderImg()}
                 <label htmlFor='upload' className='upload-btn' onChange={(e)=>this.changeHandle(e)} >
                     <img src={photo} alt=""/>
-                    <input type="file" id='upload' multiple="multiple" ref='fileINPUT' accept="image/gif,image/jpeg,image/tiff,image/x-png"/>
+                    <input type="file" id='upload' multiple="multiple" ref='fileINPUT' />
                 </label>
             </div>
         );
