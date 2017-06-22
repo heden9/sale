@@ -8,7 +8,7 @@ module.exports = [
         user: {
             acc: '哈哈'
         },
-        pics: ['https://img.alicdn.com/tps/TB1_ZEeOFXXXXcxaXXXXXXXXXXX-160-280.png_400x400q90.jpg']
+        pics: ['https://img.alicdn.com/tps/TB1_ZEeOFXXXXcxaXXXXXXXXXXX-160-280.png_400x400q90.jpg','https://img.alicdn.com/tps/TB1_ZEeOFXXXXcxaXXXXXXXXXXX-160-280.png_400x400q90.jpg']
     },
     {
         name: '时尚牛皮百搭棕',

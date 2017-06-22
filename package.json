@@ -39,11 +39,13 @@
   "dependencies": {
     "es6-promise": "^3.2.1",
     "immutable": "^3.8.1",
-    "react": "^15.5.4",
+    "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.3.1",
     "react-addons-pure-render-mixin": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^2.7.0",
+    "react-swipe": "^5.0.8",
+    "swipe-js-iso": "^2.0.3",
     "whatwg-fetch": "^1.0.0"
   }
 }

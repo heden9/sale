@@ -13,7 +13,9 @@ router.get('/api/sell/goods/list_goods/', function *(next) {
 
     this.body = detailListData;
 });
-
+router.get('/api/sell/goods/detail/', function *(next) {
+    this.body = detailListData[0];
+});
 router.post('/api/sell/goods/picture_upd/', function *(next) {
     console.log('接受文件');
 

@@ -3,7 +3,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { Link } from 'react-router';
 import './style.less';
 import add from '../../static/Icon/add.svg';
-import more from '../../static/Icon/more.svg';
 import re from '../../static/Icon/re.svg';
 export default class Navigator extends React.Component{
     constructor(props, context){
@@ -16,6 +15,7 @@ export default class Navigator extends React.Component{
             case 'detail': return(<Link to='/publish' className='add-btn'><img src={add} alt=""/></Link>);
             case '404': return(<img src={re} alt="" onClick={()=>{window.history.back()}}/>);
             case 'publish' : return(<img src={re} alt="" onClick={()=>{window.history.back()}}/>);
+            default: return(<img src={re} alt="" onClick={()=>{window.history.back()}}/>);
         }
     }
     render(){

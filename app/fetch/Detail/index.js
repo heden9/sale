@@ -30,3 +30,13 @@ export function submit(data){
         result = post('/index.php/goods/sell_ope',data);
     return result;
 }
+
+
+export function getGoodsInfo(id){
+    let result;
+    if(__DEV__)
+        result = get(`/api/sell/goods/detail`);
+    else
+        result = get(`/index.php/goods/detail?id=${id}`);
+    return result;
+}
